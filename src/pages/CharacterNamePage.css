@@ -1,0 +1,17 @@
+.character-name-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.character-name-page input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.character-name-page button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+}

@@ -1,0 +1,36 @@
+.game-end-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #282c34;
+    color: #ffffff;
+    text-align: center;
+}
+
+.game-end-page h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.game-end-page p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.game-end-page button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.game-end-page button:hover {
+    background-color: #21a1f1;
+}
