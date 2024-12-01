@@ -1,6 +1,6 @@
 import chatGPTRequest from "../chatGPTRequest";
-import processJson from "../utils/processJson";
-import filterOptionsNew from "../utils/filterOptionsNew";
+import processJson from "../utilites/processJson";
+// import filterOptionsNew from "../utils/filterOptionsNew";
 
 interface StartOfStory {
   storyStart: string;
@@ -9,7 +9,6 @@ interface StartOfStory {
 
 const delay = (ms: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, ms));
-const defaultDelayMs = 5000; // Default delay of 5000 ms
 
 const fetchStoryStart = async (
   chosenGenre: string,
@@ -20,37 +19,7 @@ const fetchStoryStart = async (
   apiKey: string,
   provider: string
 ): Promise<StartOfStory> => {
-  // const prompt1 = `
-  // Please read the following instructions carefully before proceeding:
-  // You're an AI writing a text-based adventure game. The protagonist is ${chosenCharacter}, who is ${characterGender}, with these traits: "${characterTraits.join(
-  //   '", "'
-  // )}" and this backstory: "${characterBio}".
-  // The genre of our game is ${chosenGenre}. First, Craft a compelling opening scene (65-200 words) that starts the adventure. Make sure to:
-  // - When addressing the main character refer to them as "you" or "your"
-  // - Choose a unique and lesser-known setting within the genre
-  // - Use vivid language to write engaging sentences
-  // - Build suspense and tension
-  // - Introduce choices that have real consequences
-  // - Present relationships between characters
-  // - Balance action, dialogue, and description
-  // - Surprise the reader with twists and subverted expectations
-  // - Set the mood and atmosphere of the scene
 
-  // Second, create 3 to 5 game options in the options key of the JSON that continue the story. Each option (10-30 words) should allow the player to explore the scene or interact with characters. Make sure each option fits the game's setting, leads to different story paths, and includes a risk level (low, medium, high). Include a "risky" option if possible.
-
-  // Strictly put your responses in this JSON format:
-  // {
-  //   "storyStart": "{opening paragraph or scene, 65-200 words}",
-  //   "options": {
-  //     "option1": {
-  //       "text": "{option text, 10-30 words}",
-  //       "risk": "{risk level, low, medium, high}",
-  //     },
-  //     // ... up to option5 in the same format
-  //   }
-  // }
-
-  // `;
 
   const prompt1 = `
   Please read the following instructions carefully before proceeding:

@@ -1,6 +1,5 @@
-import chatGPTRequest from "../chatGPTRequest";
-import dallERequest from "../dallE";
-import processJson from "../utils/processJson";
+import chatGPTRequest from "../chatGPTRequest.ts";
+import processJson from "../utilites/processJson.ts";
 
 interface CharacterData {
   characterQuirks: string[];
@@ -12,7 +11,6 @@ interface CharacterData {
 const fetchCharacterTraitsAndBio = async (
   chosenGenre: string,
   chosenCharacter: string,
-  chosenImage: string,
   apiKey: string,
   provider: string
 ) => {
@@ -46,20 +44,10 @@ const fetchCharacterTraitsAndBio = async (
     fetchedCharacterTraitsAndBio[0]
   );
 
-  // console.log("Fetched characterData:", characterData);
-
-  // const characterImage = await dallERequest(
-  //   chosenGenre,
-  //   chosenCharacter,
-  //   characterData.characterFacialFeatures,
-  //   characterData.characterGender,
-  //   apiKey
-  // );
 
   return {
     characterTraits: characterData.characterQuirks,
     characterBio: characterData.characterBio,
-    characterImage: chosenImage,
     characterGender: characterData.characterGender,
   };
 };
