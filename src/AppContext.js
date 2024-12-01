@@ -1,5 +1,5 @@
-// src/AppContext.js
 import React, { createContext, useState } from 'react';
+import { CHATGPT_API_KEY, CHATGPT_PROVIDER_NAME } from './utilites/consts.ts';
 
 export const AppContext = createContext();
 
@@ -12,18 +12,29 @@ export const AppProvider = ({ children }) => {
         characterTraits: [],
         characterBio: '',
         characterGender: '',
-        apiKey: '',
-        provider: '',
+        apiKey: CHATGPT_API_KEY,
+        provider: CHATGPT_PROVIDER_NAME,
         turnCount: 0,
         isLoading: false,
         isFinal: false,
         gameState: '',
+        options: [],
+        storySegment: '',
         storyAndUserInputs: [],
         error: null,
     });
 
+    // to increment game turn count
+    const incrementTurnCount = (newState = {}) => {
+        setState((prevState) => ({
+            ...prevState,
+            turnCount: prevState.turnCount + 1,
+            ...newState, // for any other changes
+        }));
+    };
+
     return (
-        <AppContext.Provider value={{ state, setState }}>
+        <AppContext.Provider value={{ state, setState, incrementTurnCount }}>
             {children}
         </AppContext.Provider>
     );

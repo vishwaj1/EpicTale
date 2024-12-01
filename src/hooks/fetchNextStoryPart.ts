@@ -1,6 +1,6 @@
-import chatGPTRequest from "../chatGPTRequest";
-import processJson from "../utils/processJson";
-import filterOptionsNew from "../utils/filterOptionsNew";
+import chatGPTRequest from "../chatGPTRequest.ts";
+import processJson from "../utilites/processJson.ts";
+import filterOptionsNew from "../utilites/filterOptions.ts";
 
 interface NextStoryPart {
   storySegment: string;
@@ -25,9 +25,8 @@ const fetchNextStoryPartAndOptions = async (
   )}", and a backstory "${characterBio}". Here's a brief of the recent plot and user choices: ${storySummary.slice(
     -16
   )}. 
-  Given the recent events "${previousParagraph}" and the user's latest action "${
-    input.text
-  }", craft the next segment (65-200 words). This should:
+  Given the recent events "${previousParagraph}" and the user's latest action "${input.text
+    }", craft the next segment (65-200 words). This should:
   - Follow logically from previous events and user choices.
   - Use second person for the main character.
   - Incorporate literary techniques to enhance depth (e.g., foreshadowing, vivid imagery).

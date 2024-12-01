@@ -1,6 +1,6 @@
-import chatGPTRequest from "../chatGPTRequest";
-import processJson from "../utils/processJson";
-import filterOptionsNew from "../utils/filterOptionsNew";
+import chatGPTRequest from "../chatGPTRequest.ts";
+import processJson from "../utilites/processJson.ts";
+import filterOptionsNew from "../utilites/filterOptions.ts";
 
 interface NextStoryPart {
   storySegment: string;
@@ -39,10 +39,9 @@ const fetchEndingStoryPartAndOptions = async (
     ", "
   )}] and a compelling backstory "${characterBio}", is at the crux of the narrative.
     Reflecting on the summary of the last 16 turns here: ${formatStorySummary(
-      storySummary.slice(-16)
-    )}, and taking into account the user's recent choice "${
-    input.text
-  }", decide if the story should climax and conclude, or if it needs to escalate towards a compelling resolution.
+    storySummary.slice(-16)
+  )}, and taking into account the user's recent choice "${input.text
+    }", decide if the story should climax and conclude, or if it needs to escalate towards a compelling resolution.
     - If concluding: Set 'isFinal' to true. Craft a final segment (65-200 words) that delivers a fitting resolution aligned with the story's progression, thematic elements, and character development. The narrative should capture complex motivations, intertwining subplots or backstory elements, and evoke a strong emotional response like suspense or catharsis.
     - If continuing: Set 'isFinal' to false. Develop the story further, heightening tension and progressing towards a climax. Introduce innovative twists, employing literary techniques such as foreshadowing, non-linear narratives, or vivid imagery to enhance depth and interest. Avoid clichés and ensure each segment is immersive, detailed, and respects the gravity of user decisions.
     In both scenarios:

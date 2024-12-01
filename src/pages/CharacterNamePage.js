@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CharacterNamePage.css';
 import fetchCharacterTraitsAndBio from '../hooks/fetchCharacterTraitsAndBio.ts';
+import { AppContext } from '../AppContext';
+import { CHATGPT_API_KEY, CHATGPT_PROVIDER_NAME } from "../utilites/consts.ts";
+import { fetchStoryStart } from '../hooks/fetchStartOfStory.ts';
 
 const CharacterNamePage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [loading, setLoading] = useState(false);
+    const { state, setState } = useContext(AppContext); // Access AppContext
+    console.log('AppContext State:', state);
     const navigate = useNavigate();
 
     const handleFirstNameChange = (event) => {
@@ -24,38 +29,60 @@ const CharacterNamePage = () => {
         setLastName(randomLastNames[Math.floor(Math.random() * randomLastNames.length)]);
     };
 
-    // const handleSubmit = () => {
-    //     const characterName = { firstName, lastName };
-    //     localStorage.setItem('characterName', JSON.stringify(characterName));
-    //     // Navigate to the next page or start the game
-    //     navigate('/start-game');
-    // };
-
     const handleSubmit = async () => {
         setLoading(true);
         const characterName = `${firstName} ${lastName}`;
+        const selectedGenre = state.chosenGenre; // Use genre from AppContext
+
+        if (!selectedGenre) {
+            alert('No genre selected. Please go back and select a genre.');
+            setLoading(false);
+            return;
+        }
 
         try {
-            // Call your character generation function with necessary inputs
             const characterData = await fetchCharacterTraitsAndBio(
-                localStorage.getItem('selectedGenre'),
+                selectedGenre,
                 characterName,
-                '<API_KEY>',
-                'chatgpt',
+                CHATGPT_API_KEY,
+                CHATGPT_PROVIDER_NAME,
             );
 
-            // Store character data in local storage or context
-            localStorage.setItem('characterData', JSON.stringify(characterData));
+            const { characterTraits, characterBio, characterGender } = characterData;
 
-            console.log(JSON.stringify(characterData));
+            console.log(characterData);
 
-            // Navigate to the next page
-            navigate('/start-game');
+            const gameStart = await fetchStoryStart(
+                selectedGenre,
+                characterName,
+                characterTraits,
+                characterBio,
+                characterGender,
+                CHATGPT_API_KEY,
+                CHATGPT_PROVIDER_NAME,
+            );
+
+            console.log(gameStart);
+
+            const { storyStart, options } = gameStart;
+
+            // Update global state with character data
+            setState((prevState) => ({
+                ...prevState,
+                chosenCharacter: characterName,
+                characterBio: characterBio,
+                characterTraits: characterTraits,
+                characterGender: characterGender,
+                storySegment: storyStart,
+                options: options,
+            }));
+
+            navigate('/start-game'); // Navigate to the next page
         } catch (error) {
             console.error('Error generating character data:', error);
             alert('Failed to generate character data. Please try again.');
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     };
 
@@ -78,6 +105,20 @@ const CharacterNamePage = () => {
             <button onClick={handleSubmit} disabled={loading}>
                 {loading ? 'Generating...' : 'Submit'}
             </button>
+
+            {/* Display character data if available */}
+            {state.characterData && (
+                <div className="character-preview">
+                    <h3>Character Preview</h3>
+                    <p><strong>Name:</strong> {state.characterData.characterName}</p>
+                    <p><strong>Bio:</strong> {state.characterData.characterBio}</p>
+                    <p><strong>Gender:</strong> {state.characterData.characterGender}</p>
+                    <p>
+                        <strong>Traits:</strong>{' '}
+                        {state.characterData.characterTraits?.join(', ')}
+                    </p>
+                </div>
+            )}
         </div>
     );
 };

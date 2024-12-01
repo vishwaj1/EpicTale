@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SelectGenrePage.css';
+import { AppContext } from '../AppContext';
 
 const genres = [
     { name: 'Fantasy', description: 'Explore magical worlds full of wonder and adventure.' },
@@ -11,6 +12,7 @@ const genres = [
 
 const SelectGenrePage = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const { setState } = useContext(AppContext); // Access setState from AppContext
     const navigate = useNavigate();
 
     const handleSearchChange = (event) => {
@@ -18,9 +20,12 @@ const SelectGenrePage = () => {
     };
 
     const handleGenreClick = (genre) => {
-        // Save the selected genre to local storage or pass it to the next page
-        localStorage.setItem('selectedGenre', JSON.stringify(genre));
-        navigate('/character-name');
+        // Update the global state with the selected genre
+        setState((prevState) => ({
+            ...prevState,
+            chosenGenre: genre.name
+        }));
+        navigate('/character-name'); // Navigate to the next page
     };
 
     const filteredGenres = genres.filter((genre) =>

@@ -1,20 +1,14 @@
-// src/hooks/useStoryProgress.ts
-import { useContext } from "react";
-import { AppContext } from "../AppContext";
+import { useContext } from 'react';
+import { AppContext } from '../AppContext';
 import {
   fetchNextStoryPartAndOptions,
   fetchStorySummary,
-} from "./fetchNextStoryPart";
+} from './fetchNextStoryPart.ts';
 import {
   fetchEndingStoryPartAndOptions,
   fetchDetailedStorySummary,
-} from "./fetchEndingStoryPartAndOptions";
-import { saveOrUpdateStory } from "../helpers/indexedDB";
-
-interface Option {
-  text: string;
-  risk: string;
-}
+} from './fetchEndingStoryPartAndOptions.ts';
+import { saveOrUpdateStory } from '../utilites/indexedDb.ts';
 
 const useStoryProgress = () => {
   const { state, setState } = useContext(AppContext);
@@ -31,17 +25,15 @@ const useStoryProgress = () => {
     turnCount,
   } = state;
 
-  const handleUserInput = async (option: Option) => {
+  const handleUserInput = async (option) => {
     try {
-      let storySegment: string;
-      let options: any;
-      let isFinal = false;
       setState((prevState) => ({ ...prevState, isLoading: true }));
 
-      let response,
-        wrapUpDetails = {};
+      let response, wrapUpDetails = {};
+      let isFinal = false;
 
       if (turnCount >= 7) {
+        // Fetch ending part of the story if turnCount exceeds or equals 7
         response = await fetchEndingStoryPartAndOptions(
           storySummary,
           previousParagraph,
@@ -54,8 +46,6 @@ const useStoryProgress = () => {
           apiKey,
           provider
         );
-        storySegment = response.storySegment;
-        options = response.options;
         isFinal = response.isFinal;
 
         if (isFinal) {
@@ -66,6 +56,7 @@ const useStoryProgress = () => {
           );
         }
       } else {
+        // Fetch next part of the story for intermediate turns
         response = await fetchNextStoryPartAndOptions(
           storySummary,
           previousParagraph,
@@ -78,48 +69,60 @@ const useStoryProgress = () => {
           apiKey,
           provider
         );
-        storySegment = response.storySegment;
-        options = response.options;
       }
 
+      // Fetch the summary of the new story segment
       const newStorySummary = await fetchStorySummary(
-        storySegment,
+        response.storySegment,
         apiKey,
         provider
       );
 
-      setState((prevState) => ({
-        ...prevState,
+      // Prepare the updated state
+      const updatedState = {
+        ...state,
         storySummary: [
-          ...prevState.storySummary,
-          " :USERS CHOICE: " + option.text + " : " + newStorySummary,
+          ...state.storySummary,
+          ` :USERS CHOICE: ${option.text} : ${newStorySummary}`,
         ],
         storyAndUserInputs: [
-          ...prevState.storyAndUserInputs,
+          ...state.storyAndUserInputs,
           option.text,
-          storySegment,
+          response.storySegment,
         ],
-        turnCount: prevState.turnCount + 1,
-        previousParagraph: storySegment,
-        options,
+        turnCount: state.turnCount + 1,
+        previousParagraph: response.storySegment,
+        options: response.options,
         isLoading: false,
         ...(isFinal
           ? {
-              isFinal: true,
-              gameState: "endingScreen",
-              ...wrapUpDetails,
-            }
+            isFinal: true,
+            gameState: 'endingScreen',
+            ...wrapUpDetails,
+          }
           : {}),
-      }));
+        storySegment: response.storySegment,
+      };
+
+      // Update the global state
+      setState(updatedState);
+
+      // Persist the updated state in IndexedDB
+      saveOrUpdateStory(updatedState);
     } catch (error) {
-      console.error("Failed to process story progression:", error);
+      console.error('Failed to process story progression:', error);
+
+      // Handle errors by updating the state with an error message
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
-        error: "Failed to fetch story data, please try again.",
+        error: error.response
+          ? `Error: ${error.response.data.message}`
+          : 'Failed to fetch story data, please try again.',
       }));
     }
   };
+
   return handleUserInput;
 };
 

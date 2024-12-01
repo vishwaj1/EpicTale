@@ -1,14 +1,12 @@
-import chatGPTRequest from "../chatGPTRequest";
-import processJson from "../utilites/processJson";
-// import filterOptionsNew from "../utils/filterOptionsNew";
+import chatGPTRequest from "../chatGPTRequest.ts";
+import processJson from "../utilites/processJson.ts";
+import filterOptions from "../utilites/filterOptions.ts";
 
 interface StartOfStory {
   storyStart: string;
   options: { [key: string]: { text: string; risk: string } };
 }
 
-const delay = (ms: number) =>
-  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 const fetchStoryStart = async (
   chosenGenre: string,
@@ -56,7 +54,7 @@ const fetchStoryStart = async (
   `;
 
   let attempts = 0;
-  const maxAttempts = 5; // Maximum number of attempts before failing
+  const maxAttempts = 5;
 
   while (attempts < maxAttempts) {
     try {
@@ -65,10 +63,10 @@ const fetchStoryStart = async (
         response[0]
       );
 
-      const filteredOptions = filterOptionsNew(responseObject.options);
+      const filteredOptions = filterOptions(responseObject.options);
       responseObject.options = filteredOptions;
 
-      return responseObject; // Return response on success
+      return responseObject;
     } catch (error: any) {
       console.error("Failed to parse retrying");
     }
