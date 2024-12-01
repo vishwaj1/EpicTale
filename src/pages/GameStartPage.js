@@ -7,7 +7,7 @@ import useStoryProgress from '../hooks/useStoryProgress.ts';
 const GameStartPage = () => {
     const navigate = useNavigate();
     const { state, setState } = useContext(AppContext);
-    console.log('AppContext State:', state);
+    // console.log('AppContext State:', state);
     const handleUserInput = useStoryProgress();
 
     const handleOptionSelect = async (optionKey) => {
@@ -19,18 +19,17 @@ const GameStartPage = () => {
             }
 
             await handleUserInput(selectedOption); // Fetch the next story part
-            handleEndGame();
         } catch (error) {
             console.error('Failed to process story progression:', error);
             alert('An error occurred while progressing the story. Please try again.');
         }
     };
 
-    const handleEndGame = () => {
+    useEffect(() => {
         if (state.isFinal) {
             navigate('/game-end');
         }
-    };
+    }, [state.isFinal, navigate]);
 
     return (
         <div className="game-start-page">

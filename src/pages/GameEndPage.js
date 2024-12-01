@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './GameEndPage.css'; 
+import { AppContext } from '../AppContext';
+import './GameEndPage.css';
 
 const GameEndPage = () => {
     const navigate = useNavigate();
+    const { state } = useContext(AppContext);
 
     const handleNewGameClick = () => {
         navigate('/', { replace: true });
@@ -12,7 +14,7 @@ const GameEndPage = () => {
     return (
         <div className="game-end-page">
             <h1>GAME OVER</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>{state.storySummary?.join(' ') || 'No summary available.'}</p>
             <button onClick={handleNewGameClick}>Start a new game</button>
         </div>
     );

@@ -32,6 +32,7 @@ const useStoryProgress = () => {
       let response, wrapUpDetails = {};
       let isFinal = false;
 
+      // console.log(turnCount);
       if (turnCount >= 7) {
         // Fetch ending part of the story if turnCount exceeds or equals 7
         response = await fetchEndingStoryPartAndOptions(
