@@ -1,17 +1,36 @@
 .character-name-page {
     text-align: center;
     padding: 20px;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    font-family: "Press Start 2P", sans-serif;
 }
 
 .character-name-page input {
     display: block;
     margin: 10px auto;
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
+    width: 60%;
+    border-radius: 5px;
+    border: 2px solid #ff9900;
+    background-color: #292929;
+    color: #ffffff;
 }
 
 .character-name-page button {
     margin: 10px;
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 16px;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 10px;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.character-name-page button:hover {
+    background-color: #21a1f1;
+    transform: scale(1.1);
 }

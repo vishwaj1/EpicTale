@@ -1,27 +1,45 @@
 .select-genre-page {
     text-align: center;
     padding: 20px;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    font-family: "Press Start 2P", sans-serif;
 }
 
 .search-bar {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
+    width: 60%;
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px solid #ff9900;
+    background-color: #2a2a2a;
+    color: #ffffff;
 }
 
 .genre-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
 }
 
 .genre-card {
-    border: 1px solid #ccc;
+    background-color: #292929;
+    color: #e6e6e6;
     padding: 20px;
     margin: 10px;
-    width: 200px;
+    width: 220px;
     text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background-color 0.3s;
+    border: 2px solid #ff9900;
+    font-size: 1.2rem;
+}
+
+.genre-card:hover {
+    background-color: #ff9900;
+    transform: scale(1.05);
+    color: #1a1a1a;
 }

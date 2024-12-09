@@ -90,25 +90,25 @@ const fetchEndingStoryPartAndOptions = async (
 };
 
 const fetchDetailedStorySummary = async (
-  storySummary: string[],
-  apiKey: string,
-  provider: string
-): Promise<StorySummary> => {
-  const formatStorySummary = (storySummary: string[]): string => {
+  storySummary,
+  apiKey,
+  provider
+) => {
+  const formatStorySummary = (storySummary) => {
     return storySummary
       .map((part, index) => `${index + 1}: ${part}`)
       .join("\n");
   };
 
   const prompt = `
-  Imagine you're creating a "Story Wrapped" for this adventure, much like Spotify Wrapped but for the epic tale we've just experienced! Below is the entire story progression. Use this to generate a vibrant and shareable summary that not only captures the essence but also highlights the fun, quirky, and most memorable moments:
+    Imagine you're creating a "Story Wrapped" for this adventure, much like Spotify Wrapped but for the epic tale we've just experienced! Below is the entire story progression. Use this to generate a vibrant and shareable summary that not only captures the essence but also highlights the fun, quirky, and most memorable moments:
   ${formatStorySummary(storySummary)}
 
-  1. **Epic Recap**: Whip up a catchy and fun summary of the story. Think of it as the back cover of a best-selling novel.
-  2. **Showstopper Moment**: Pinpoint the most thrilling or hilarious moment in the story. The kind of moment that would make headlines in the story world!
-  3. **Signature Move**: What's one thing the character just couldn't stop doing? Make it sound like a fun plot quirk that fans would tweet about.
-  4. **Character Quirk**: Shine a light on a hilarious or defining trait of the main character that made the story uniquely theirs.
-  5. **Theme Song**: If this story had a theme song, based on the main themes explored, what would it be? Describe it in a fun way that matches the story's vibe.
+  1. *Epic Recap*: Whip up a catchy and fun summary of the story. Think of it as the back cover of a best-selling novel.
+  2. *Showstopper Moment*: Pinpoint the most thrilling or hilarious moment in the story. The kind of moment that would make headlines in the story world!
+  3. *Signature Move*: What's one thing the character just couldn't stop doing? Make it sound like a fun plot quirk that fans would tweet about.
+  4. *Character Quirk*: Shine a light on a hilarious or defining trait of the main character that made the story uniquely theirs.
+  5. *Theme Song*: If this story had a theme song, based on the main themes explored, what would it be? Describe it in a fun way that matches the story's vibe.
 
 Please format the responses like this, ready to be shared and enjoyed on social media in this JSON format:
 {
@@ -118,10 +118,10 @@ Please format the responses like this, ready to be shared and enjoyed on social 
   "characterTraitHighlight": "{Character Quirk}",
   "themeExploration": "{Theme Song}"
 }
-`;
+  `;
 
   let response;
-  let responseObject: StorySummary = {
+  let responseObject = {
     wrapUpParagraph: "",
     bigMoment: "",
     frequentActivity: "",
@@ -133,7 +133,7 @@ Please format the responses like this, ready to be shared and enjoyed on social 
   while (!success) {
     try {
       response = await chatGPTRequest(prompt, apiKey, provider);
-      responseObject = processJson<StorySummary>(response[0]);
+      responseObject = processJson(response[0]);
       success = true;
     } catch (error) {
       console.error("Error processing response, retrying request...", error);
@@ -142,5 +142,6 @@ Please format the responses like this, ready to be shared and enjoyed on social 
 
   return responseObject;
 };
+
 
 export { fetchEndingStoryPartAndOptions, fetchDetailedStorySummary };

@@ -1,36 +1,62 @@
 .game-end-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #282c34;
-    color: #ffffff;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  height: 100vh;
+  background-color: #000000;
+  color: #61dafb;
+  font-family: "Press Start 2P", sans-serif;
+  text-align: center;
+  overflow-y: auto;
 }
 
 .game-end-page h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
+  font-size: 3rem;
+  color: #ff9900;
+  margin-bottom: 2rem;
 }
 
-.game-end-page p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin-bottom: 2rem;
+.summary-section, .key-moments-section {
+  background-color: #121212;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  width: 80%;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border: 2px solid #ff9900;
+}
+
+.summary-section h2, .key-moments-section h2 {
+  font-size: 1.8rem;
+  color: #61dafb;
+  margin-bottom: 15px;
+}
+
+.summary-section ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.key-moments-section p {
+  margin: 10px 0;
 }
 
 .game-end-page button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    color: #ffffff;
-    background-color: #61dafb;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: #ff9900;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .game-end-page button:hover {
-    background-color: #21a1f1;
+  background-color: #ff9900;
 }

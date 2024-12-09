@@ -59,7 +59,7 @@ const GameStartPage = () => {
                     <h3>Character Details</h3>
                     <p><strong>Name:</strong> {state.chosenCharacter || 'Loading...'}</p>
                     <p><strong>Bio:</strong> {state.characterBio || 'Loading...'}</p>
-                    <p><strong>Gender:</strong> {state.characterGender || 'Loading...'}</p>
+                    {/* <p><strong>Gender:</strong> {state.characterGender || 'Loading...'}</p> */}
                     <p>
                         <strong>Traits:</strong>{' '}
                         {state.characterTraits?.join(', ') || 'Loading...'}

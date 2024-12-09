@@ -16,12 +16,14 @@ export const AppProvider = ({ children }) => {
         provider: CHATGPT_PROVIDER_NAME,
         turnCount: 0,
         isLoading: false,
+        storySoFar: [],
         isFinal: false,
         gameState: '',
         options: [],
         storySegment: '',
         storyAndUserInputs: [],
         error: null,
+        // previousStory: []
     });
 
     // to increment game turn count
