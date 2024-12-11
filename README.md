@@ -54,14 +54,25 @@ Prerequisites
     •	Styling: CSS Modules
 
 ## Contributors
-    •	Vishwanth Reddy Jakka - 
-[GitRepoLink](https://github.com/vishwaj1)
-    •	Rohith Reddy Mada - [GitRepoLink](https://github.com/rohithmada00)
-    •	Hanuma Sashank Samudrala - [GitRepoLink](https://github.com/HanumaSashank)
-    •	Satvik Reddy - [GitRepoLink](https://github.com/Msathvik007)
+- Vishwanth Reddy Jakka - [vishwaj1]
+-  Rohith Reddy Mada - [rohitmada00]
+-  Hanuma Sashank Samudrala - [HanumaSashank]
+-  Satvik Reddy - [Msathvik007]`
     
 For any issues or questions, please raise a GitHub issue or contact us at vishwaj1@umbc.edu.
+
 [GitHub Repository Link](https://github.com/vishwaj1/EpicTale)
+
+
+Game Poster:
+![alt text]('/Users/vishwanthreddyjakka/EpicTale/IFTG_Poster.jpg')
+
+
+[vishwaj1]: https://github.com/vishwaj1
+[rohitmada00]: https://github.com/rohithmada00
+[HanumaSashank]: https://github.com/HanumaSashank
+[Msathvik007]: https://github.com/Msathvik007
+
    
 
  
