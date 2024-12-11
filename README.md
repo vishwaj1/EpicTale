@@ -4,7 +4,7 @@ A dynamic, AI-powered interactive fiction game where players craft unique narrat
 ## Overview
 EpicTale combines genre-driven storytelling with adaptive AI to create immersive, branching narratives tailored to user choices. Players select their genre, customize characters, and explore personalized storylines generated in real-time.
 
-##Features
+## Features
     •	5+ Genres: Mystical Thriller, Mythological Epics, Time Travel Adventure, and more.
     •	Personalized Gameplay: 50+ combinations for player identity.
     •	AI-Powered Narratives: Dynamic story arcs generated using OpenAI APIs.
@@ -57,7 +57,7 @@ Prerequisites
 - Vishwanth Reddy Jakka - [vishwaj1]
 -  Rohith Reddy Mada - [rohitmada00]
 -  Hanuma Sashank Samudrala - [HanumaSashank]
--  Satvik Reddy - [Msathvik007]`
+-  Sathvik Reddy - [Msathvik007]`
     
 For any issues or questions, please raise a GitHub issue or contact us at vishwaj1@umbc.edu.
 
@@ -65,7 +65,7 @@ For any issues or questions, please raise a GitHub issue or contact us at vishwa
 
 
 Game Poster:
-![alt text]('/Users/vishwanthreddyjakka/EpicTale/IFTG_Poster.jpg')
+![alt text]('IFTG_Poster.jpg')
 
 
 [vishwaj1]: https://github.com/vishwaj1
