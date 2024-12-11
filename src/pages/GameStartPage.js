@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GameStartPage.css';
 import { AppContext } from '../AppContext';
@@ -6,7 +6,7 @@ import useStoryProgress from '../hooks/useStoryProgress.ts';
 
 const GameStartPage = () => {
     const navigate = useNavigate();
-    const { state, setState } = useContext(AppContext);
+    const { state, } = useContext(AppContext);
     // console.log('AppContext State:', state);
     const handleUserInput = useStoryProgress();
 

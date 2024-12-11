@@ -47,9 +47,16 @@
     transition: background-color 0.3s;
 }
 
-.options button:hover {
+.options button:hover:not(:disabled) {
     background-color: #21a1f1;
 }
+
+.options button:disabled {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+}
+
 
 .character-details {
     flex: 2;
