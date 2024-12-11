@@ -65,7 +65,7 @@ For any issues or questions, please raise a GitHub issue or contact us at vishwa
 
 
 Game Poster:
-![alt text]('IFTG_Poster.jpg')
+![alt text]('https://github.com/vishwaj1/EpicTale/blob/main/IFTG_Poster.jpg')
 
 
 [vishwaj1]: https://github.com/vishwaj1
