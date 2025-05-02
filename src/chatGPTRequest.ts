@@ -1,24 +1,25 @@
 import axios, { AxiosResponse } from "axios";
 
+const APIKey = process.env.REACT_APP_GROQ_API_KEY;
 // Define interfaces for better type management
 interface BaseProviderConfig {
   model: string;
   url?: string;
-  apiKey: string;
+  apiKey?: string;
   function: (prompt: string, config: BaseProviderConfig) => Promise<string[]>;
 }
 
 // Configuration includes API model, endpoint, key, and request
 const config: { [key: string]: BaseProviderConfig } = {
   chatgpt: {
-    model: "gpt-4",
-    url: "https://api.openai.com/v1/chat/completions",
-    apiKey: "",
-    function: chatgptRequest,
+    model: "llama3-70b-8192", // or whatever model name Groq uses
+    url: "https://api.groq.com/openai/v1/chat/completions", // Groq’s OpenAI-compatible endpoint
+    apiKey: '',
+    function: chatgptRequest, // your custom function for Groq requests
   },
-
-  // Add other LLM configurations here
 };
+
+
 
 // Central request function to switch between providers
 const request = async (
